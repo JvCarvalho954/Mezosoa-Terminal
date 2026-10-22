@@ -13,33 +13,61 @@ class MezosoaTerminal
 {
     class ConsoleController()
     {
-        public string[] buffer;
+        public List<string> buffer = [];
+        
         public void WriteLine(string str)
         {
-            //dá clear na tela inteira
-            //pega o buffer, soma com o str
-            //checa se o buffer tem 50+ linhas, se sim tira as primeiras linhas do buffer, se não, faz nada
-            //e depois dá console write line com o buffer inteiro
+            Console.Clear(); //dá clear na tela inteira
+            List<string> tbuffer = this.buffer;
+            tbuffer.Add(str);//pega o buffer, soma com o str
+            short c = (short)tbuffer.Count;
+            if (c > 50)//checa se o buffer tem 50+ linhas, se sim tira as primeiras linhas do buffer, se não, faz nada
+            {
+                for(int i = c-50; i>0; i++)
+                {
+                    tbuffer.RemoveAt(0);
+                }
+            }
+            foreach(string i in tbuffer)//e depois dá console write line com o buffer inteiro
+            {
+               Console.WriteLine(i);
+            }
+        }
+        public void Clear()//limpa a tela inteira
+        {
+            this.buffer.Clear();
+            Console.Clear();
+        }
+        public void Clear(int line)//limpa apenas 1 linha
+        {
+            List<string> buffertemp = this.buffer;
+            buffertemp.Reverse();
+            buffertemp.RemoveAt(line);
+            buffertemp.Reverse();
+            this.buffer = buffertemp;
+            this.WriteLine("");
         }
     }
 
     static void Main(string[] args)
     {
+        ConsoleController cmd = new ConsoleController();
         Console.BackgroundColor = ConsoleColor.DarkGreen;
         Console.ForegroundColor = ConsoleColor.Black;
 
-        Console.WriteLine("   _______     __      _____  ___        __       ______    _______       __      ");
+        cmd.WriteLine("   _______     __      _____  ___        __       ______    _______       __      ");
         Thread.Sleep(1000);
-        Console.WriteLine("  |   __  \\   /  \\    (\\    \\|   \\      /  \\     /  _   \\  /       |     /  \\     ");
+        cmd.WriteLine("  |   __  \\   /  \\    (\\    \\|   \\      /  \\     /  _   \\  /       |     /  \\     ");
         Thread.Sleep(1000);
-        Console.WriteLine("  (. |__) :) /    \\   |.\\\\   \\    |    /    \\   (: ( \\___)(: ______)    /    \\    ");
+        cmd.WriteLine("  (. |__) :) /    \\   |.\\\\   \\    |    /    \\   (: ( \\___)(: ______)    /    \\    ");
         Thread.Sleep(1000);
-        Console.WriteLine("  |:  ____/ /' /\\  \\  |: \\.   \\\\  |   /' /\\  \\   \\/ \\      \\/    |     /' /\\  \\   ");
+        cmd.WriteLine("  |:  ____/ /' /\\  \\  |: \\.   \\\\  |   /' /\\  \\   \\/ \\      \\/    |     /' /\\  \\   ");
         Thread.Sleep(1000);
-        Console.WriteLine("  (|  /    //  __'  \\ |.  \\    \\. |  //  __'  \\  //  \\ _   // ___)_   //  __'  \\  ");
+        cmd.WriteLine("  (|  /    //  __'  \\ |.  \\    \\. |  //  __'  \\  //  \\ _   // ___)_   //  __'  \\  ");
         Thread.Sleep(1000);
-        Console.WriteLine(" /|__/ \\  /   /  \\\\  \\|    \\    \\ | /   /  \\\\  \\(:   _) \\ (:       | /   /  \\\\  \\ ");
+        cmd.WriteLine(" /|__/ \\  /   /  \\\\  \\|    \\    \\ | /   /  \\\\  \\(:   _) \\ (:       | /   /  \\\\  \\ ");
         Thread.Sleep(1000);
-        Console.WriteLine("(_______)(___/    \\___)\\___|\\____\\)(___/    \\___)\\_______) \\_______)(___/    \\___)");
+        cmd.WriteLine("(_______)(___/    \\___)\\___|\\____\\)(___/    \\___)\\_______) \\_______)(___/    \\___)");
+        
     }
 }
