@@ -43,7 +43,7 @@ class ConsoleController()
                 Console.WriteLine(i);
             }
         }
-        public string ReadLine(string mesage="")
+        public string ReadLine(string mesage="")//readline, e pode colocar uma mensagem para ser escrita antes da resposta, igual o input no python
         {
             Console.Write(mesage);
             string? input = Console.ReadLine();
